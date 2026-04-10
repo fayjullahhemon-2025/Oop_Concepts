@@ -27,92 +27,69 @@ public class Main {
         Showroom showroom[] = new Showroom[5];
         Employee employee[] = new Employee[5];
         Car car[] = new Car[5];
-        while(true){
+        int choice = 100;
+        while(choice !=0){
             main_menu();
-            int choice = input.nextInt();
-            if(choice==1){
-                while(showroom_counter<5){
-                    showroom[showroom_counter].set_Details();
-                    System.out.println("1) Add more Showroom \t\t\t 9)Main menu");
-                    choice = input.nextInt();
-                    if(choice == 1){
+            choice = input.nextInt();
+            while(choice !=0 && choice !=9){
+
+                switch(choice){
+                    case 1:
+                        showroom[showroom_counter] = new Showroom();
+                        showroom[showroom_counter].set_Details();
                         showroom_counter++;
-                    }else if(choice == 9){
-                        break;
-                    }else{
-                        System.out.println("Enter Valid choice");
+                        System.out.println("1)Add More Showroom");
+                        System.out.println("9)Back To Main Menu");
                         choice = input.nextInt();
-                    }
-
-                }
-
-            }else if(choice == 2){
-                while(employee_counter<5){
-
-                    employee[employee_counter].set_Details();
-                    System.out.println("1) Add Employee \t\t\t 9)Main menu");
-                    choice = input.nextInt();
-                    if(choice == 1){
+                        break;
+                    case 2:
+                        employee[employee_counter] = new Employee();
+                        employee[employee_counter].set_Details();
                         employee_counter++;
-                    }else if(choice == 9){
-                        break;
-                    }else{
-                        System.out.println("Enter Valid choice");
+                        System.out.println("2)Add More Employee");
+                        System.out.println("9) Back TO Main Menu");
                         choice = input.nextInt();
-                    }
-
-                }
-            }else if(choice ==3){
-                while(car_counter<5){
-
-                    car[car_counter].set_Details();
-                    System.out.println("1) Add Car \t\t\t 9)Main menu");
-                    choice = input.nextInt();
-                    if(choice == 1){
+                        break;
+                    case 3:
+                        car[car_counter] = new Car();
+                        car[car_counter].set_Details();
                         car_counter++;
-                    }else if(choice == 9){
-                        break;
-                    }else{
-                        System.out.println("Enter Valid choice");
+                        System.out.println("3)Add More Car");
+                        System.out.println("9)Back To Main Menu");
                         choice = input.nextInt();
-                    }
+                        break;
+                    case 4:
+                        for(int i = 0; i<showroom_counter;i++){
+                            showroom[i].get_Details();
+                            System.out.println("");
+                        }
+                        System.out.println("9)Back To main menu");
+                        System.out.println("0)Exit");
+                        choice = input.nextInt();
+                        break;
+                    case 5:
+                        for(int i = 0; i<employee_counter;i++){
+                            employee[i].get_Details();
+                            System.out.println("");
+                        }
+                        System.out.println("9)Back To main menu");
+                        System.out.println("0)Exit");
+                        choice = input.nextInt();
+                        break;
+                    case 6:
+                        for(int i = 0; i<car_counter;i++){
+                            car[i].get_Details();
+                            System.out.println("");
+                        }
+                        System.out.println("9)Back To main menu");
+                        System.out.println("0)Exit");
+                        choice = input.nextInt();
+                        break;
+                    default:
+                        System.out.println("Enter valid input");
+                        choice = input.nextInt();
+                        break;
 
-                }
-            }else if(choice == 4){
-                for(int i =0; i< showroom_counter;i++){
-                    showroom[i].get_Details();
-                }
-                System.out.println("9) Main menu");
-                choice = input.nextInt();
-                if(choice ==9){
-                    main_menu();
-                }else{
-                    System.out.println("Enter valid choice");
-                    choice = input.nextInt();
-                }
-            }else if(choice == 5){
-                for(int i =0; i< employee_counter;i++){
-                    employee[i].get_Details();
-                }
-                System.out.println("9) Main menu");
-                choice = input.nextInt();
-                if(choice ==9){
-                    main_menu();
-                }else{
-                    System.out.println("Enter valid choice");
-                    choice = input.nextInt();
-                }
-            }else if(choice ==6){
-                for(int i =0; i< car_counter;i++){
-                    car[i].get_Details();
-                }
-                System.out.println("9) Main menu");
-                choice = input.nextInt();
-                if(choice ==9){
-                    main_menu();
-                }else{
-                    System.out.println("Enter valid choice");
-                    choice = input.nextInt();
                 }
             }
         }

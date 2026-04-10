@@ -27,6 +27,7 @@ public class Employee extends Showroom implements Utility{
         System.out.print("Age: ");
         emp_age = input.nextInt();
         System.out.print("");
+        input.nextLine();
         System.out.print("Department: ");
         emp_department = input.nextLine();
         System.out.print("");

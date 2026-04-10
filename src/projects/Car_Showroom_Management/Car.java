@@ -28,7 +28,7 @@ public class Car extends Showroom implements Utility{
         System.out.print("");
         System.out.print("Car Fuel Type: ");
         car_fuel_type = input.nextLine();
-        System.out.print("");
+        input.nextLine();
         System.out.print("Car transmission: ");
         car_transmission = input.nextLine();
         System.out.print("");

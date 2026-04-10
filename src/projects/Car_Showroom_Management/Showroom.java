@@ -31,7 +31,7 @@ public class Showroom implements Utility{
         System.out.print("");
         System.out.print("Total Cars in stock: ");
         total_cars_in_stock = input.nextInt();
-        System.out.print("");
+        input.nextLine();
         System.out.print("Manager name: ");
         manager_name = input.nextLine();
         System.out.print("");
