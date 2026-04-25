@@ -1,92 +1,106 @@
 package Practices;
 //Write a Java program to create a class with methods
 // to search for flights and hotels, and to book and cancel reservations.
-import java.security.spec.PSSParameterSpec;
-import java.time.LocalDate;
-import java.time.LocalTime;
+
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.random.RandomGenerator;
-import java.util.UUID;
 class Flights{
     private int flightNumber;
+    private String passengerName;
     private String origin;
     private String destination;
-    private LocalDate date;
-    private LocalTime time;
+    private String date;
     private int numPassengers;
     private double price;
-    public Flights(String origin, String destination,LocalDate date,LocalTime time,double price, int numPassengers){
-        this.flightNumber = RandomGenerator.getDefault().nextInt(1520, 65210);
+    private int confirmationNumber;
+    private ArrayList flights;
+    public Flights(int flightNumber, String passengerName, String origin, String destination, String date, int numPassengers, double price){
+
+        this.flightNumber = flightNumber;
+        this.passengerName = passengerName;
         this.origin = origin;
         this.destination = destination;
         this.date = date;
-        this.time = time;
-        this.price = price;
         this.numPassengers = numPassengers;
+        this.price = price;
+        this.flights = new ArrayList<>();
     }
-    public int getFlightNumber(){
-        return flightNumber;
+    public int reserveFlight(String passengerName){
+        flights.add(passengerName);
+        confirmationNumber = RandomGenerator.getDefault().nextInt(100000,999999);
+        return confirmationNumber;
     }
-}
-class Hotels{
-
-}
-class Passenger{
-    private String name;
-    private String id;
-
-    private static ArrayList<TravelApp> reserveFlight;
-    public Passenger(String name){
-        this.name = name;
-        UUID uid = UUID.randomUUID();
-        this.id = String.valueOf(uid);
-
-        reserveFlight = new ArrayList<TravelApp>();
+    public ArrayList getFlightsPassengers(){
+        return flights;
     }
-    public ArrayList<TravelApp> getBookFlight(){
-        return reserveFlight;
-    }
-
-    public int reserveFlights(TravelApp rf){
-        reserveFlight.add(rf);
-        return RandomGenerator.getDefault().nextInt(100,5000);
-    }
-    public void getPassengerInfo(){
-        System.out.println("Name: "+name);
-        System.out.println("ID: "+id);
-
-    }
-    public String getName(){
-        return name;
+    public void cancelFlight(int confirmationNumber,String passengerName){
+        if(this.confirmationNumber == confirmationNumber){
+            flights.remove(passengerName);
+            System.out.println("Flight cancel Successfully");
+        }else{
+            System.out.println("Wrong confirmation code");
+        }
     }
 }
+class Hotel{
+    private int HotelNumber;
+    private String guestName;
+    private String date;
+    private int numOfGuest;
+    private double price;
+    private int confirmationNumber;
+    private ArrayList hotels;
+    public Hotel(int HotelNumber, String guestName, String date, int numOfGuest, double price){
 
-class TravelApp{
-    private int confirmationCode;
-    private static ArrayList<Flights> flights;
-    private static ArrayList<Hotels> hotels;
-    public TravelApp(){
-        flights = new ArrayList<Flights>();
-        hotels = new ArrayList<Hotels>();
+        this.HotelNumber = HotelNumber;
+        this.guestName = guestName;
+        this.date = date;
+        this.numOfGuest = numOfGuest;
+        this.price = price;
+        this.hotels = new ArrayList<>();
     }
-    public int addFlight(Flights flight){
-        flights.add(flight);
-        confirmationCode = RandomGenerator.getDefault().nextInt(100,3000);
-        return confirmationCode;
+    public int reserveHotelRoom(String guestName){
+        hotels.add(guestName);
+        confirmationNumber = RandomGenerator.getDefault().nextInt(100000,999999);
+        return confirmationNumber;
     }
-    public void cancelReservation(Flights flight){
-        flights.remove(flight);
+    public ArrayList getHotelGues(){
+        return hotels;
+    }
+    public void cancelHotelRoom(int confirmationNumber,String guestName){
+        if(this.confirmationNumber == confirmationNumber){
+            hotels.remove(guestName);
+            System.out.println("Room cancel Successfully");
+        }else{
+            System.out.println("Wrong confirmation code");
+        }
     }
 }
 public class problem19 {
     public static void main(String[] args) {
-        Passenger p1 = new Passenger("Emon");
-        Flights f1 = new Flights("Dhaka","Chittagong",LocalDate.of(2026,4,24),LocalTime.now(),15000,3);
-        TravelApp t1= new TravelApp();
-        t1.addFlight(f1);
-        System.out.println("Flight number: "+f1.getFlightNumber()+" is reseverd by"+p1.getName()+". The confirmation code is: "+p1.reserveFlights(t1));
+        Flights f1 = new Flights(3210,"Null","Dhaka","Chittagong","24-04-2024",3,3200);
+        f1.reserveFlight("Emon");
+        f1.reserveFlight("Payel");
+        int c = f1.reserveFlight("Moon");
+        for(Object f : f1.getFlightsPassengers()){
+            System.out.println(f);
+        }
 
-        p1.getPassengerInfo();
+        f1.cancelFlight(c,"Moon");
+        for(Object f : f1.getFlightsPassengers()){
+            System.out.println(f);
+        }
+        Hotel h1 = new Hotel(2101,"Null","24-04-2026",3,5800);
+        h1.reserveHotelRoom("Emon");
+        h1.reserveHotelRoom("Payel");
+        c = h1.reserveHotelRoom("Moon");
+        for(Object h : h1.getHotelGues()){
+            System.out.println(h);
+        }
+        h1.cancelHotelRoom(c,"Moon");
+        for(Object h : h1.getHotelGues()){
+            System.out.println(h);
+        }
     }
 }
